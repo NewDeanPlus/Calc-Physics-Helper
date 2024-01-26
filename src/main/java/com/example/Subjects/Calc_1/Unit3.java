@@ -1,4 +1,4 @@
-package com.example.Calc_1;
+package com.example.Subjects.Calc_1;
 
 import com.example.Subunit;
 import com.example.Unit;

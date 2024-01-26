@@ -1,6 +1,6 @@
-package com.example;
+package com.example.MathStuff;
 
-import com.example.Term.*;
+import com.example.MathStuff.Term.*;
 
 public class NewMath {
 
@@ -45,7 +45,7 @@ public class NewMath {
         }
 
         public Term ChainRule(Term term){
-            return term
+            return term;
         }
 
         public Term PartialDerivative(Term term, Variable withRespectTo){
