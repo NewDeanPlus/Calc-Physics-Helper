@@ -82,10 +82,10 @@ public class Term {
     public class NaturalLog{
             boolean ifExists;
             Term power;
-            Term containedTerm;
-        public NaturalLog(Term p, Term t){
+            Equation containedEquation;
+        public NaturalLog(Term p, Equation t){
             this.power = p;
-            this.containedTerm = t;
+            this.containedEquation = t;
             this.ifExists = true;
         }
 
@@ -266,6 +266,23 @@ public class Term {
         this.tan = a;
     }
 
-    
+    public void addVariable(Variable v){
+        Variable[] newVariables = new Variable[variables.length + 1];
+        for(int i=0; i<variables.length; i++){
+            newVariables[i] = variables[i];
+        }
+        newVariables[variables.length+1] = v;
+        this.variables = newVariables;
+    }
+
+    public int findVariable(char name){
+        for(int i=0; i<variables.length; i++){
+            if(variables[i].variableName == name){
+                return i;
+            }
+        }
+        addVariable(new Variable(name, new Term(0)));
+        return variables.length;
+    }
 
 }
