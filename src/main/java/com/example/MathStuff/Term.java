@@ -6,9 +6,10 @@ public class Term {
     private double coefficient;
     private NumberE e;
     private NaturalLog ln;
-    private Cosine cos;
-    private Sine sin;
-    private Tangent tan;
+    private Cosine[] cos;
+    private Sine[] sin;
+    private Tangent[] tan;
+    private Power pow; //entire term to a power
     // private Integral integ;
     //private Derivative deriv;
     private Variable[] variables;
@@ -23,9 +24,9 @@ public class Term {
         
         NumberE e,
         NaturalLog ln,
-        Cosine cos,
-        Sine sin,
-        Tangent tan,
+        Cosine[] cos,
+        Sine[] sin,
+        Tangent[] tan,
         // Integral integ,
         // Derivative deriv,
         
@@ -96,9 +97,9 @@ public class Term {
 
     public class Cosine{
             boolean ifExists;
-            Term power;
+            int power; //only handles integral powers for trig
             Term containedTerm;
-        public Cosine(Term p, Term t){
+        public Cosine(int p, Term t){
             this.power = p;
             this.containedTerm = t;
             this.ifExists = true;
@@ -111,9 +112,9 @@ public class Term {
 
     public class Sine{
             boolean ifExists;
-            Term power;
+            int power;
             Term containedTerm;
-        public Sine(Term p, Term t){
+        public Sine(int p, Term t){
             this.power = p;
             this.containedTerm = t;
             this.ifExists = true;
@@ -126,15 +127,28 @@ public class Term {
 
     public class Tangent{
             boolean ifExists;
-            Term power;
+            int power;
             Term containedTerm;
-        public Tangent(Term p, Term t){
+        public Tangent(int p, Term t){
             this.power = p;
             this.containedTerm = t;
             this.ifExists = true;
         }
 
         public Tangent(String na){
+            this.ifExists = false;
+        }
+    }
+
+    public class Power{
+            boolean ifExists;
+            Term degree;
+        public Power(Term degree){
+            this.degree = degree;
+            this.ifExists = true;
+        }
+
+        public Power(String na){
             this.ifExists = false;
         }
     }
@@ -208,15 +222,15 @@ public class Term {
         return this.ln;
     }
 
-    public Cosine getCosine(){
+    public Cosine[] getCosine(){
         return this.cos;
     }
 
-    public Sine getSine(){
+    public Sine[] getSine(){
         return this.sin;
     }
 
-    public Tangent getTangent(){
+    public Tangent[] getTangent(){
         return this.tan;
     }
 
@@ -237,7 +251,7 @@ public class Term {
     }
 
     public Variable[] getVariables(){
-        return variables;
+        return this.variables;
     }
 
     //setters
@@ -254,16 +268,16 @@ public class Term {
         this.ln = a;
     }
 
-    public void setCosine(Cosine a){
-        this.cos = a;
+    public void setCosine(Cosine a, int index){
+        this.cos[index] = a;
     }
 
-    public void setSine(Sine a){
-        this.sin = a;
+    public void setSine(Sine a, int index){
+        this.sin[index] = a;
     }
 
-    public void setTangent(Tangent a){
-        this.tan = a;
+    public void setTangent(Tangent a, int index){
+        this.tan[index] = a;
     }
 
     public void addVariable(Variable v){

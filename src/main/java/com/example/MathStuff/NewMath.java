@@ -13,15 +13,20 @@ public class NewMath {
             double coefficient = term.getCoefficient();
             NumberE e = term.getNumberE();
             NaturalLog ln = term.getNaturalLog();
-            Cosine cos = term.getCosine();
-            Sine sin = term.getSine();
-            Tangent tan = term.getTangent();
+        //increases length of trig arrays to allow for space for derivatives, may need to increase futher
+            Cosine[] cos = new Cosine[term.getCosine().length + 1];
+                cos = term.getCosine();
+            Sine[] sin = new Sine[term.getSine().length + 1];
+                sin = term.getSine();
+            Tangent[] tan = new Tangent[term.getTangent().length + 1];
+                tan = term.getTangent();
             Variable[] variables = term.getVariables();
 
         //derivative of e
             if(e.power.isConstant == true){
                 coefficient *= Math.pow(Math.E, e.power.getCoefficient());
             }else{
+                Errors.printError("e with non-constant power");
                 //TODO - idk, sounds complicated
             }
 
@@ -33,17 +38,22 @@ public class NewMath {
                         //TODO - remove ln from term, subtract 1 from power of variable at index j, multiply coefficient by power of variable inside ln equation
                         variables[j].power.setCoefficient(variables[j].power.getCoefficient() - 1);
                         coefficient *= ln.containedEquation.getTerm(0).getVariable(0).power.getCoefficient(); //assuming variable coefficient is constant
-                        ln.ifExists = false; ln = new NaturalLog("na");  //should deal with getting rid of ln
+                        ln.ifExists = false; ln = null; //new NaturalLog("na");  //should deal with getting rid of ln
                     }
                 }else{
                     Errors.printError("natural log with power > 1");
                 }
             }else{
+                Errors.printError("natural log contains more than one term");
                 //TODO - what to do if ln contains more than one term
             }
 
         //trig derivatives
+            if(cos[0] != null && sin[0] != null && tan[0] != null){
+                Errors.printError("trig");
+            }
             //TODO - fuckin hate trig, i'll do this when I figure out a way to make it work with the system
+            
 
         //variable derivatives (power rule)
                 Variable v;
@@ -53,6 +63,7 @@ public class NewMath {
                     coefficient *= v.power.getCoefficient();
                     v.power.setCoefficient(v.power.getCoefficient() - 1);
                 }else{
+                    Errors.printError("variable with non-constant power");
                     //TODO - idk, i'll work on it
                 }
             }
@@ -61,13 +72,16 @@ public class NewMath {
 
         }
 
-        public Term ChainRule(Term term){
+    //TODO - complex calc stuff
+        public Term ChainRule(Term term){  //if taking derivative of function to power
             return term;
         }
 
-        public Term PartialDerivative(Term term, Variable withRespectTo){
+        public Term PartialDerivative(Term term, Variable withRespectTo){  //if partial derivative
             return term;
         }
+
+        //TODO - maybe have another class for integration
 
         public Term IndefiniteIntegral(Term term, Variable withRespectTo, boolean includeC){
             return term;
@@ -78,5 +92,3 @@ public class NewMath {
         }
 
     }
-    
-}
