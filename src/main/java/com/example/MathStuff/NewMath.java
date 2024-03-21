@@ -81,8 +81,6 @@ public class NewMath {
             return term;
         }
 
-        //TODO - maybe have another class for integration
-
         public Term IndefiniteIntegral(Term term, Variable withRespectTo, boolean includeC){
             return term;
         }
