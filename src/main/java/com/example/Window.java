@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 
 public class Window {
 
+    //https://docs.oracle.com/javase%2Ftutorial%2Fuiswing%2F%2F/components/frame.html
+
     JFrame window;
     
     public Window(){
