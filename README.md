@@ -6,6 +6,10 @@ This is a project I've been working on to help me cement my understanding in jav
   - basic derivation
   - more complicated derivative rules like chain rule
   - solve derivative problems while identifying best techniques to use
+- work on setting up UI
+  - general menus
+  - connect settings to text file to save
+  - connect graphics to backend math stuff for solving and problem generation
 
 ###  - TO DO - 
 - add functionality for solving algebra problems
