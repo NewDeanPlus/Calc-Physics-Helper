@@ -2,3 +2,7 @@ Window Width
 500
 Window Height 
 400
+Use Decimals in Generated Problems
+false
+Show Correct Answer in Generated Problems
+false
