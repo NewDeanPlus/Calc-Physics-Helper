@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,7 +30,6 @@ public class Window implements ActionListener{
     //https://docs.oracle.com/javase%2Ftutorial%2Fuiswing%2F%2F/components/frame.html
 
     public JFrame window;
-    public JButton solverbutton;
     
     public Window(){
         window = new JFrame("Dean's Math Solver");
@@ -49,17 +49,22 @@ public class Window implements ActionListener{
 
         JLabel label = new JLabel("Dean's Math Helper");
         label.setFont(new Font("Sans Serif", Font.BOLD, 30));
-        solverbutton = new JButton("Solver");
-        JButton helpbutton = new JButton("Concepts");
+
+        JButton generatorbutton = new JButton("Problem Generator");
+        JButton solverbutton = new JButton("Solver");
+        JButton helpbutton = new JButton("Equations");
         JButton settingsbutton = new JButton("Settings");
         JButton infobutton = new JButton("Info");
 
         label.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        generatorbutton.setAlignmentX(JButton.CENTER_ALIGNMENT);
         solverbutton.setAlignmentX(JButton.CENTER_ALIGNMENT);
         helpbutton.setAlignmentX(JButton.CENTER_ALIGNMENT);
         settingsbutton.setAlignmentX(JButton.CENTER_ALIGNMENT);
         infobutton.setAlignmentX(JButton.CENTER_ALIGNMENT);
 
+        generatorbutton.setActionCommand("generator");
+        generatorbutton.addActionListener(this);
         solverbutton.setActionCommand("solver");
         solverbutton.addActionListener(this);
         helpbutton.setActionCommand("help");
@@ -72,6 +77,8 @@ public class Window implements ActionListener{
         contentPane.add(Box.createVerticalGlue());
         contentPane.add(label);
         contentPane.add(Box.createRigidArea(new Dimension(0, 15)));
+        contentPane.add(generatorbutton);
+        contentPane.add(Box.createRigidArea(new Dimension(0, 15)));
         contentPane.add(solverbutton);
         contentPane.add(Box.createRigidArea(new Dimension(0, 15)));
         contentPane.add(helpbutton);
@@ -81,6 +88,79 @@ public class Window implements ActionListener{
         contentPane.add(infobutton);
         contentPane.add(Box.createVerticalGlue());
         window.setVisible(true);
+    }
+
+    public void setupGeneratorWindow(){
+        window.getContentPane().setLayout(new BoxLayout(window.getContentPane(), BoxLayout.Y_AXIS));
+        JLabel label = new JLabel("Solver");
+        label.setFont(new Font("Sans Serif", Font.BOLD, 30));
+        JButton backbutton = new JButton("Back");
+
+        //actual options
+        JPanel panel1 = new JPanel();
+        panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
+        panel1.setBounds(0, 0, 300, 400);
+        JTabbedPane tab1 = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
+//TODO - this section is also going to get very complicated very quickly, work on a way to simplify this.
+//maybe add text file to get text from depending on combo box menu option
+//have solve button also check combo box menu and use math classes to do the math
+            JPanel calcPanel = new JPanel();
+            calcPanel.setLayout(new BoxLayout(calcPanel, BoxLayout.Y_AXIS));
+                JComboBox calcMenu = new JComboBox(new String[]{"option 1", "option 22222222222222222222", "option 3","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1",});
+                calcPanel.add(calcMenu);
+
+            //setup box for entering problem
+                JTextArea calcText = new JTextArea("Type Problem Here");
+                calcText.setLineWrap(true);
+                calcText.setEditable(true);
+                calcPanel.add(calcText);
+
+            //setup box for settings and check buttons
+                JPanel buttonPanel1 = new JPanel(new FlowLayout());
+                JButton calcSettings = new JButton("Settings");
+                buttonPanel1.add(calcSettings);
+                JButton calcCheck = new JButton("Check");
+                buttonPanel1.add(calcCheck);
+                calcPanel.add(buttonPanel1);
+                    calcSettings.setActionCommand("generatorSettings");
+                    calcSettings.addActionListener(this);
+                    calcCheck.setActionCommand("generatorCheck");
+                    calcCheck.addActionListener(this);
+
+            //setup box for displaying solution
+                JTextArea calcSolution = new JTextArea("Solution Appears Here");
+                calcSolution.setLineWrap(true);
+                calcSolution.setEditable(false);
+                calcPanel.add(calcSolution);
+
+
+            JPanel physPanel = new JPanel(new FlowLayout());
+                JComboBox physMenu = new JComboBox(new String[]{"option 1", "option 22222222222222222222", "option 3","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1",});
+                physPanel.add(physMenu);
+            JPanel egrPanel = new JPanel(new FlowLayout());
+                JComboBox egrMenu = new JComboBox(new String[]{"option 1", "option 22222222222222222222", "option 3","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1",});
+                egrPanel.add(egrMenu);
+        tab1.addTab("Calculus", calcPanel);
+        tab1.addTab("Physics", physPanel);
+        tab1.addTab("Engineering", egrPanel);
+        panel1.add(Box.createHorizontalStrut(5));
+        panel1.add(tab1);
+        panel1.add(Box.createHorizontalStrut(5));
+
+        label.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        backbutton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        panel1.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
+
+        window.getContentPane().add(label);
+        window.getContentPane().add(Box.createRigidArea(new Dimension(0, 15)));
+        window.getContentPane().add(panel1);
+        window.getContentPane().add(Box.createRigidArea(new Dimension(0, 15)));
+        window.getContentPane().add(backbutton);
+        window.getContentPane().add(Box.createRigidArea(new Dimension(0, 15)));
+        window.revalidate();
+
+        backbutton.setActionCommand("back");
+        backbutton.addActionListener(this);
     }
 
     public void setupSolverWindow(){
@@ -105,6 +185,7 @@ public class Window implements ActionListener{
                 JTextArea calcText = new JTextArea("Type Problem Here");
                 calcText.setLineWrap(true);
                 calcText.setEditable(true);
+                calcText.setToolTipText("Type Problem Here");
                 calcPanel.add(calcText);
 
                 JButton calcSolve = new JButton("Solve");
@@ -147,7 +228,7 @@ public class Window implements ActionListener{
 
     public void setupHelpWindow(){
         window.getContentPane().setLayout(new BoxLayout(window.getContentPane(), BoxLayout.Y_AXIS));
-        JLabel label = new JLabel("Concepts");
+        JLabel label = new JLabel("Equations");
         label.setFont(new Font("Sans Serif", Font.BOLD, 30));
         JButton backbutton = new JButton("Back");
 
@@ -162,7 +243,7 @@ public class Window implements ActionListener{
                 JComboBox calcMenu = new JComboBox(new String[]{"option 1", "option 22222222222222222222", "option 3","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1",});
                 calcPanel.add(calcMenu);
 
-                JTextArea calcText = new JTextArea("Hello. This is a little project I've been working on recently to help me review math & physics. This program includes a Solver made to solve a variety of types of math problems, along with a Concepts section to refresh you on any concepts you might have forgotten.");
+                JTextArea calcText = new JTextArea("Hello. This is a little project I've been working on recently to help me review math & physics. This program includes a Solver made to solve a variety of types of math problems, along with a Equations section to refresh you on any equations you might have forgotten.");
                 calcText.setLineWrap(true);
                 calcText.setEditable(false);
                 calcPanel.add(calcText);
@@ -237,7 +318,7 @@ public class Window implements ActionListener{
         //panel with text
         JPanel panel1 = new JPanel();
         panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
-        JTextArea text = new JTextArea("Hello. This is a little project I've been working on recently to help me review math & physics. This program includes a Solver made to solve a variety of types of math problems, along with a Concepts section to refresh you on any concepts you might have forgotten.");
+        JTextArea text = new JTextArea("Hello. This is a little project I've been working on recently to help me review math & physics. This program includes a Solver made to solve a variety of types of math problems, along with a Equations section to refresh you on any equations you might have forgotten.");
         text.setLineWrap(true);
         text.setEditable(false);
         text.setHighlighter(null);
@@ -275,9 +356,49 @@ public class Window implements ActionListener{
             case "settings": setupSettingsWindow(); break;
             case "info": setupInfoWindow(); break;
             case "backToMain" : startupSetup(); break;
+            case "generator": setupGeneratorWindow(); break;
+            case "generatorCheck": checkGeneratedProblem(); break;
+            case "generatorSettings": openGeneratorSettings(); break;
             default: startupSetup();
         }
         
+    }
+
+//TODO - GENERATOR METHODS
+
+//TODO - PROBLEM GENERATION SETTINGS: 
+    //include option to pick between whole and decimal answers & given numbers in generated problems
+    //option to see correct answer or not, etc.
+    private void openGeneratorSettings() {
+        window.getContentPane().removeAll();
+        window.repaint();
+
+        window.getContentPane().setLayout(new BoxLayout(window.getContentPane(), BoxLayout.Y_AXIS));
+            JPanel option1 = new JPanel(new GridLayout());
+            JTextArea option1Label = new JTextArea("Use decimals in generated problems. If disabled, problems will only contain whole numbers");
+            option1Label.setLineWrap(true); option1Label.setEditable(false); option1Label.setHighlighter(null); 
+            JCheckBox option1CheckBox = new JCheckBox();
+//read settings.txt and change accordingly
+            //option1checkbox.setselected() ...
+            option1.add(option1Label); option1.add(option1CheckBox); window.getContentPane().add(option1);
+
+            JPanel option2 = new JPanel(new GridLayout());
+            JTextArea option2Label = new JTextArea("See correct answer after pressing the 'Solve' button. If disabled, the program will only say whether your answer is correct or incorrect");
+            option2Label.setLineWrap(true); option2Label.setEditable(false); option2Label.setHighlighter(null);
+            JCheckBox option2CheckBox = new JCheckBox();
+            option2.add(option2Label); option2.add(option2CheckBox); window.getContentPane().add(option2); window.getContentPane().add(Box.createVerticalStrut(200));
+
+            JButton backButton = new JButton("Back");
+            backButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+            backButton.setActionCommand("generator");
+            backButton.addActionListener(this);
+            window.getContentPane().add(backButton); window.getContentPane().add(Box.createVerticalStrut(15));
+            window.revalidate();
+    }
+
+//TODO - THIS WILL PROBABLY BE THE MOST COMPLICATED THING TO SETUP IN THIS PROGRAM
+    private void checkGeneratedProblem() {
+
     }
     
 }
