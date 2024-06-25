@@ -1,6 +1,8 @@
 # Experimental Calc & Physics Helper
 This is a project I've been working on to help me cement my understanding in java as well as helping me review a bunch of stuff from calc and physics classes that I barely remember.
 
+NOTE: I realize that it would be ridiculous to write a program to solve every single problem you might encounter in a calc or physics class, so I will likely just focus on derivative/integral rules and stuff like continuity. I plan on adding functionality for almost all types of physics problems eventually. Most of those are pretty consistent in format, so once I get the code working with all of the formulas and variables, I should be able to get those set up relatively quickly.
+
 ###  - IN PROGRESS - 
 - develop engine to solve various math problems from scratch
   - basic derivation
