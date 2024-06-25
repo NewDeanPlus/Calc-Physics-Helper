@@ -8,6 +8,10 @@ NOTE: I realize that it would be ridiculous to write a program to solve every si
   - basic derivation
   - more complicated derivative rules like chain rule
   - solve derivative problems while identifying best techniques to use
+- work on setting up UI
+  - general menus
+  - connect settings to text file to save
+  - connect graphics to backend math stuff for solving and problem generation
 
 ###  - TO DO - 
 - add functionality for solving algebra problems
