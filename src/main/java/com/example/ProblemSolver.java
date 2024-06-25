@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.MathStuff.Equation;
+
 public class ProblemSolver {
 
     String problemType;
@@ -11,6 +13,9 @@ public class ProblemSolver {
 
         //switch statement to actually redirect based on problem type
         switch(problemType){
+            case "Test":
+                Equation e = new Equation(userInput);
+                return e.containedTerms[0]+" "+e.containedTerms[1]+" "+e.containedTerms[2]+" "+e.containedTerms[3]+" "+e.containedTerms[4];
         //CALC 1
             case "Find Limit": 
 
