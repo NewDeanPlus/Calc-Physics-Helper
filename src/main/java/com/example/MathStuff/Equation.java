@@ -1,21 +1,43 @@
 package com.example.MathStuff;
 
+import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.example.Functions;
+import com.example.Regex;
+
 public class Equation {
 
     public Term[] terms;
 
+    public String equation;
+    public String[] containedTerms = new String[26];
+
+    public static Pattern p1 = Regex.pattern1[1];
+    public static Matcher m1;
+
     public Equation(Term... terms){
-
+        //left over constructor, may re-use later
         this.terms = terms;
-        //create some kind of system to link terms using operators (+,-,*,/) while still allowing for freedom of parentheses
-        //also create functions that allow program to convert between objects and plain text, but won't need that for a while
+    }
 
-        //save equations as strings with terms contained inside, for example
-        // ((x + 1) * ((y^2)/(6x^3))) = 2 converted into
-        // ((A) * ((B)/(C))) - D where
-        // A = x + 1, B = y^2, C = 6x^3, D = -2
+    public Equation(String equation){
+        //use regex to get ( [anything that isn't parentheses] ) and put into containedTerms array. replace stuff in parentheses with char from Functions.indexToVariable
+        equation = equation.replaceAll(" ", ""); //removes whitespace
+        m1 = p1.matcher(equation);
 
-        //TODO - implement this in code
+        for(int i=0; i<containedTerms.length; i++){
+            if(m1.find()){
+                containedTerms[i] = m1.group();
+                equation = equation.replaceFirst("(\\([^\\(|\\)]*\\))", String.valueOf(Functions.indexToVariable(i)));
+                m1 = p1.matcher(equation);
+            }else{
+        System.out.println("c");
+                break;
+            }
+        }
+        System.out.println(equation);
     }
 
     public Term getTerm(int index){
