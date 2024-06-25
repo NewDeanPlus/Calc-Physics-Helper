@@ -6,3 +6,5 @@ Use Decimals in Generated Problems
 false
 Show Correct Answer in Generated Problems
 false
+Use Different Unit Prefixes in Physics Problems
+false
