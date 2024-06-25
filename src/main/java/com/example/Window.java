@@ -30,7 +30,7 @@ public class Window implements ActionListener{
     //https://docs.oracle.com/javase%2Ftutorial%2Fuiswing%2F%2F/components/frame.html
 
     public JFrame window;
-    public JTextArea calcProbToSolve; public JComboBox calcMenu;
+    public JTextArea calcProbToSolve; public JComboBox calcMenu; JTextArea calcSolution;
     public ProblemSolver solver = new ProblemSolver();
     
     public Window(){
@@ -181,7 +181,7 @@ public class Window implements ActionListener{
 //have solve button also check combo box menu and use math classes to do the math
             JPanel calcPanel = new JPanel();
             calcPanel.setLayout(new BoxLayout(calcPanel, BoxLayout.Y_AXIS));
-                calcMenu = new JComboBox(new String[]{"option 1", "option 22222222222222222222", "option 3","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1",});
+                calcMenu = new JComboBox(new String[]{"Test", "option 22222222222222222222", "option 3","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1",});
                 calcPanel.add(calcMenu);
 
                 calcProbToSolve = new JTextArea("Type Problem Here");
@@ -195,7 +195,7 @@ public class Window implements ActionListener{
                 calcSolve.setActionCommand("calcSolve");
                 calcSolve.addActionListener(this);
 
-                JTextArea calcSolution = new JTextArea("Solution Appears Here");
+                calcSolution = new JTextArea("Solution Appears Here");
                 calcSolution.setLineWrap(true);
                 calcSolution.setEditable(false);
                 calcPanel.add(calcSolution);
@@ -244,7 +244,7 @@ public class Window implements ActionListener{
 //TODO - this section is going to get very complicated very quickly, work on a way to simplify this.
             JPanel calcPanel = new JPanel();
             calcPanel.setLayout(new BoxLayout(calcPanel, BoxLayout.Y_AXIS));
-                JComboBox calcMenu = new JComboBox(new String[]{"option 1", "option 22222222222222222222", "option 3","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1",});
+                JComboBox calcMenu = new JComboBox(new String[]{"Test", "option 22222222222222222222", "option 3","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1",});
                 calcPanel.add(calcMenu);
 
                 JTextArea calcText = new JTextArea("Hello. This is a little project I've been working on recently to help me review math & physics. This program includes a Solver made to solve a variety of types of math problems, along with a Equations section to refresh you on any equations you might have forgotten.");
@@ -352,19 +352,17 @@ public class Window implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        window.getContentPane().removeAll();
-        window.repaint();
         switch(e.getActionCommand()){
-            case "solver": setupSolverWindow(); break;
-            case "help": setupHelpWindow(); break;
-            case "settings": setupSettingsWindow(); break;
-            case "info": setupInfoWindow(); break;
-            case "backToMain" : startupSetup(); break;
-            case "generator": setupGeneratorWindow(); break;
-            case "generatorCheck": checkGeneratedProblem(); break;
-            case "generatorSettings": openGeneratorSettings(); break;
-            case "calcSolve": solver.calcSolve(calcMenu.getSelectedItem().toString(), calcProbToSolve.getText()); break;
-            default: startupSetup();
+            case "solver": window.getContentPane().removeAll(); window.repaint(); setupSolverWindow(); break;
+            case "help": window.getContentPane().removeAll(); window.repaint(); setupHelpWindow(); break;
+            case "settings": window.getContentPane().removeAll(); window.repaint(); setupSettingsWindow(); break;
+            case "info": window.getContentPane().removeAll(); window.repaint(); setupInfoWindow(); break;
+            case "backToMain" : window.getContentPane().removeAll(); window.repaint(); startupSetup(); break;
+            case "generator": window.getContentPane().removeAll(); window.repaint(); setupGeneratorWindow(); break;
+            case "generatorCheck": window.getContentPane().removeAll(); window.repaint(); checkGeneratedProblem(); break;
+            case "generatorSettings": window.getContentPane().removeAll(); window.repaint(); openGeneratorSettings(); break;
+            case "calcSolve": calcSolution.setText(solver.calcSolve(calcMenu.getSelectedItem().toString(), calcProbToSolve.getText())); break;
+            default: window.getContentPane().removeAll(); window.repaint(); startupSetup();
         }
         
     }
