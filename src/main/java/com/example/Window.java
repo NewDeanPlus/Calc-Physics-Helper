@@ -30,6 +30,8 @@ public class Window implements ActionListener{
     //https://docs.oracle.com/javase%2Ftutorial%2Fuiswing%2F%2F/components/frame.html
 
     public JFrame window;
+    public JTextArea calcProbToSolve; public JComboBox calcMenu;
+    public ProblemSolver solver = new ProblemSolver();
     
     public Window(){
         window = new JFrame("Dean's Math Solver");
@@ -179,17 +181,19 @@ public class Window implements ActionListener{
 //have solve button also check combo box menu and use math classes to do the math
             JPanel calcPanel = new JPanel();
             calcPanel.setLayout(new BoxLayout(calcPanel, BoxLayout.Y_AXIS));
-                JComboBox calcMenu = new JComboBox(new String[]{"option 1", "option 22222222222222222222", "option 3","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1",});
+                calcMenu = new JComboBox(new String[]{"option 1", "option 22222222222222222222", "option 3","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1","option 1",});
                 calcPanel.add(calcMenu);
 
-                JTextArea calcText = new JTextArea("Type Problem Here");
-                calcText.setLineWrap(true);
-                calcText.setEditable(true);
-                calcText.setToolTipText("Type Problem Here");
-                calcPanel.add(calcText);
+                calcProbToSolve = new JTextArea("Type Problem Here");
+                calcProbToSolve.setLineWrap(true);
+                calcProbToSolve.setEditable(true);
+                calcProbToSolve.setToolTipText("Type Problem Here");
+                calcPanel.add(calcProbToSolve);
 
                 JButton calcSolve = new JButton("Solve");
                 calcPanel.add(calcSolve);
+                calcSolve.setActionCommand("calcSolve");
+                calcSolve.addActionListener(this);
 
                 JTextArea calcSolution = new JTextArea("Solution Appears Here");
                 calcSolution.setLineWrap(true);
@@ -359,6 +363,7 @@ public class Window implements ActionListener{
             case "generator": setupGeneratorWindow(); break;
             case "generatorCheck": checkGeneratedProblem(); break;
             case "generatorSettings": openGeneratorSettings(); break;
+            case "calcSolve": solver.calcSolve(calcMenu.getSelectedItem().toString(), calcProbToSolve.getText()); break;
             default: startupSetup();
         }
         
