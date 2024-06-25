@@ -19,4 +19,8 @@ public final class Errors {
         System.out.println("Error: "+msg);
     }
 
+    public static void printError(String msg){
+        System.out.println("Error: "+msg);
+    }
+
 }
